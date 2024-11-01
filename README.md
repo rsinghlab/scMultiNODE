@@ -6,7 +6,7 @@ cell representation and optimal transport to align cells across different measur
 differential equations (ODEs) to explicitly model cell development with a regularization term to learn a dynamic latent space.
 [(bioRxiv preprint)](https://www.biorxiv.org/content/10.1101/2024.10.27.620531v1)
 
-![scMultiNODE model overview](https://github.com/rsinghlab/scMultiNODE/blob/main/model_illustration.png?raw=true)
+![scMultiNODE model overview](https://github.com/rsinghlab/scMultiNODE/blob/main/model_illustration.jpg?raw=true)
 
 **If you have questions or find any problems with our codes, feel free to submit issues or send emails to jiaqi_zhang2@brown.edu or other corresponding authors.**
 
