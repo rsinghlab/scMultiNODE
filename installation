@@ -32,7 +32,7 @@ POT # pip install POT
 dcor # pip install dcor
 tabulate # pip install tabulate
 pynndescent 0.5.10 # pip install pynndescent==0.5.10
-
+louvain 0.8.2 # pip install louvain
 
 ######################
 #		optional
@@ -41,7 +41,5 @@ pynndescent 0.5.10 # pip install pynndescent==0.5.10
 # for hyperparameter tuning
 optuna 3.2.0 # pip install optuna==3.2.0
 joblib 1.1.1 # pip install joblib==1.1.1
-
-
 
 torchmetrics 0.11.4 # pip install torchmetrics==0.11.4

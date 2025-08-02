@@ -1,13 +1,13 @@
 '''
 Description:
-    Visualize integration with 2D UMAP.
+    Visualize integration with PCA.
     Plotting Fig. 2 and Supplementary Fig. S1-S3 in the paper.
 
 Authro:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import numpy as np
-from plotting.PlottingUtils import umapWithoutPCA
+from plotting.PlottingUtils import onlyPCA
 from plotting import *
 from utils.FileUtils import loadSCData, tpSplitInd, loadIntegratedLatent
 from modal_integration import DATA_DIR_DICT
@@ -15,18 +15,6 @@ from modal_integration import DATA_DIR_DICT
 # ================================================
 
 def _plotF(rna_integrated, atac_integrated, ax1, ax2, ax3, title=""):
-    if data_name == "mouse_neocortex":
-        umap_neighbors = 50 # default 100
-        umap_dist = 0.9  # default 0.5
-    elif data_name == "human_organoid":
-        umap_neighbors = 100
-        umap_dist = 0.5
-    elif data_name == "drosophila":
-        umap_neighbors = 100
-        umap_dist = 0.9
-    else:
-        umap_neighbors = 100
-        umap_dist = 0.5
     marker_s = 10
     marker_alpha = 0.7
     color_list = Kelly20
@@ -37,7 +25,7 @@ def _plotF(rna_integrated, atac_integrated, ax1, ax2, ax3, title=""):
     cell_tp_list = np.concatenate([rna_tps, atac_tps], axis=0)
     concat_latent_sample = np.concatenate([rna_integrated, atac_integrated], axis=0)
     n_tps = len(np.unique(cell_tp_list))
-    latent_umap, _ = umapWithoutPCA(concat_latent_sample, n_neighbors=umap_neighbors, min_dist=umap_dist)
+    latent_umap, _ = onlyPCA(concat_latent_sample, pca_pcs=2)
 
     # colored by timepoint
     ax1.set_title(title)
@@ -176,17 +164,17 @@ def _plotLegend():
     removeAllBorders(ax3)
     plt.tight_layout()
     plt.savefig(
-        "./compare_all_UMAP_{}_{}_{}.png".format(data_name, data_type, split_type),
+        "./compare_all_PCA_{}_{}_{}.png".format(data_name, data_type, split_type),
         dpi=600
     )
     plt.show()
 
 
-def plotAllModelLatent(integrated_dict, model_list, plot_legend=True, plot_umap=True):
+def plotAllModelLatent(integrated_dict, model_list, plot_legend=True, plot_pca=True):
     if plot_legend:
         _plotLegend()
     # -----
-    if plot_umap:
+    if plot_pca:
         fig, ax_list = plt.subplots(3, len(model_list), figsize=(16, 7))
         for m_idx, m in enumerate(model_list):
             ax1, ax2, ax3 = ax_list[0, m_idx], ax_list[1, m_idx], ax_list[2, m_idx]
@@ -199,7 +187,7 @@ def plotAllModelLatent(integrated_dict, model_list, plot_legend=True, plot_umap=
                 removeAllBorders(ax_list[i, j])
         plt.tight_layout()
         plt.savefig(
-            "./compare_all_UMAP_{}_{}_{}-legend.png".format(data_name, data_type, split_type),
+            "./compare_all_PCA_{}_{}_{}-legend.png".format(data_name, data_type, split_type),
             dpi=600
         )
         plt.show()
@@ -241,9 +229,9 @@ if __name__ == '__main__':
     rna_tps = np.concatenate([np.repeat(t, x.shape[0]) for t, x in enumerate(rna_traj_data)])
     atac_tps = np.concatenate([np.repeat(t, x.shape[0]) for t, x in enumerate(atac_traj_data)])
     # ================================================
-    # Load model integrations and plot 2D UMAP
+    # Load model integrations and plot PCA (first two principal components)
     latent_dim = 50
     output_dim = latent_dim
     model_list = ["scMultiNODE", "SCOTv2", "SCOTv1", "Pamona", "UnionCom", "uniPort", "Seurat"]
     integrated_dict = loadIntegratedLatent(data_name, data_type, split_type, model_list, latent_dim)
-    plotAllModelLatent(integrated_dict, model_list, plot_legend=True, plot_umap=True)
+    plotAllModelLatent(integrated_dict, model_list, plot_legend=True, plot_pca=True)

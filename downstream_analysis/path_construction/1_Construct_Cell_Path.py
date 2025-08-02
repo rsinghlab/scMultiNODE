@@ -30,7 +30,7 @@ pd.set_option('display.expand_frame_repr', False)
 # ======================================================
 
 def loadModel():
-    dict_filename = "res/trained_model/coassay_cortex-reduce-all-scMultiNODE-50dim-state_dict.pt"
+    dict_filename = "./res/trained_model/coassay_cortex-reduce-all-scMultiNODE-50dim-state_dict.pt"
     n_genes = 2000
     n_peaks = 2000
     latent_dim=50
@@ -56,7 +56,7 @@ def loadModel():
 
 def loadLatent():
     res = np.load(
-        "res/trained_model/coassay_cortex-reduce-all-scMultiNODE-50dim.npy",
+        "./res/trained_model/coassay_cortex-reduce-all-scMultiNODE-50dim.npy",
         allow_pickle=True
     ).item()
     rna_integrate = res["rna_integrated"]
@@ -329,7 +329,7 @@ if __name__ == '__main__':
     data_name = "coassay_cortex"
     split_type = "all"
     data_type = "reduce"
-    data_dir = "../data/human_prefrontal_cortex_multiomic/reduce_processed/"
+    data_dir = "../../data/human_prefrontal_cortex_multiomic/reduce_processed/"
     (
         ann_rna_data, ann_atac_data, rna_cell_tps, atac_cell_tps,
         rna_n_tps, atac_n_tps, n_genes, n_peaks
@@ -343,8 +343,10 @@ if __name__ == '__main__':
     rna_traj_cell_type = [rna_cell_types[np.where(rna_cell_tps == t)[0]] for t in range(1, rna_n_tps + 1)]
     atac_traj_cell_type = [atac_cell_types[np.where(atac_cell_tps == t)[0]] for t in range(1, atac_n_tps + 1)]
     # Convert to torch project
-    rna_traj_data = [rna_cnt[np.where(rna_cell_tps == t)[0], :] for t in range(1, rna_n_tps + 1)]  # (# tps, # cells, # genes)
-    atac_traj_data = [atac_cnt[np.where(atac_cell_tps == t)[0], :] for t in range(1, atac_n_tps + 1)]  # (# tps, # cells, # peaks)
+    rna_traj_data = [rna_cnt[np.where(rna_cell_tps == t)[0], :] for t in
+                     range(1, rna_n_tps + 1)]  # (# tps, # cells, # genes)
+    atac_traj_data = [atac_cnt[np.where(atac_cell_tps == t)[0], :] for t in
+                      range(1, atac_n_tps + 1)]  # (# tps, # cells, # peaks)
     all_rna_data = np.concatenate(rna_traj_data)
     all_atac_data = np.concatenate(atac_traj_data)
     n_tps = len(rna_traj_data)
@@ -362,6 +364,7 @@ if __name__ == '__main__':
     save_filename = "./res/aux_data/coassay_cortex-reduce-all-scMultiNODE-aux_data.npy"
     print("Preparing data for analysis...")
     if not os.path.isfile(save_filename):
+        # Load scMultiNODE integration
         rna_integrate, atac_integrate = loadLatent()
         rna_cell_types = np.concatenate(rna_traj_cell_type)
         atac_cell_types = np.concatenate(atac_traj_cell_type)

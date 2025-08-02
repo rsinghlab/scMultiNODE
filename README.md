@@ -1,17 +1,14 @@
-# scMultiNODE: Temporal Single-Cell Data Integration across Unaligned Modalities
+# scMultiNODE: Integrative and Scalable Framework for Multi-Modal Temporal Single-Cell Data
 
 scMultiNODE is a model that integrates gene expression and chromatin accessibility measurements in developing single cells 
 while preserving cell type variations and cellular dynamics. scMultiNODE uses autoencoders (AEs) to learn nonlinear low-dimensional 
 cell representation and optimal transport to align cells across different measurements. Next, it utilizes neural ordinary 
 differential equations (ODEs) to explicitly model cell development with a regularization term to learn a dynamic latent space.
-[(bioRxiv preprint)](https://www.biorxiv.org/content/10.1101/2024.10.27.620531v1)
+[(bioRxiv preprint)](https://www.biorxiv.org/content/10.1101/2024.10.27.620531v2)
 
 ![scMultiNODE model overview](https://github.com/rsinghlab/scMultiNODE/blob/main/model_illustration.jpg?raw=true)
 
 **If you have questions or find any problems with our codes, feel free to submit issues or send emails to jiaqi_zhang2@brown.edu or other corresponding authors.**
-
-*(11/01/2024 updates) We have updated major parts of the experiments corresponding to our paper, including scMultiNODE 
-implementation and its integration, integration performance comparison, and downstream analysis.*
 
 
 ## Requirements

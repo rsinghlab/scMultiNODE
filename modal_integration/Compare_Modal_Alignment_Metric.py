@@ -14,6 +14,7 @@ from utils.FileUtils import loadSCData, tpSplitInd, getTimeStr, loadIntegratedLa
 from optim.evaluation import (
     neighborOverlap, FOSCTTM, transferAccuracy, featureCorrPerSample, batchEntropy, labelCorr
 )
+from modal_integration import DATA_DIR_DICT
 
 # ================================================
 
@@ -75,11 +76,15 @@ def _evaluateCoassayAlignment(x1_feature, x2_feature, x1_label, x2_label, x1_tp,
 def _evaluateUnalignedAlignment(x1_feature, x2_feature, x1_label, x2_label, x1_tp, x2_tp, data_name):
     common_cell_types = np.intersect1d(np.unique(x1_label), np.unique(x2_label))
     if data_name == "drosophila":
-        # DR dataset has lots of cell types, we use some cell types with the largest number of cells for metrics computation
+        # DR dataset has lots of cell types, we use five cell types with the largest number of cells for metrics computation
         selected_cell_type = ["brain", "epidermis", "germ cell", "somatic muscle", "amnioserosa"]
     elif data_name == "human_cortex":
         selected_cell_type = common_cell_types
     elif data_name == "mouse_neocortex":
+        selected_cell_type = common_cell_types
+    elif data_name == "zebrahub":
+        selected_cell_type = common_cell_types
+    elif data_name == "amphioxus":
         selected_cell_type = common_cell_types
     else:
         raise ValueError("The cell types are not selected.")
@@ -130,7 +135,7 @@ def computeAlignmentScore(integrated_dict, rna_cell_types, atac_cell_types, rna_
         print("*" * 70)
         print("[ {} ] Computing metrics...".format(m))
         m_metric = _func(
-            integrated_dict[m]["rna_integrated"], integrated_dict[m]["atac_integrated"],
+            integrated_dict[m]["rna"], integrated_dict[m]["atac"],
             rna_cell_types, atac_cell_types, rna_cell_tps, atac_cell_tps, data_name
         )
         model_metric[m] = m_metric
@@ -182,15 +187,9 @@ if __name__ == '__main__':
     latent_dim = 50
     output_dim = latent_dim
     model_list = ["scMultiNODE", "SCOTv1", "SCOTv2", "Pamona", "UnionCom", "uniPort", "Seurat"]
-    data_name = "coassay_cortex"  # coassay_cortex, human_organoid, drosophila, mouse_neocortex
+    data_name = "amphioxus"  # coassay_cortex, human_organoid, drosophila, mouse_neocortex, zebrahub, amphioxus
     split_type = "all"
     data_type = "reduce"
-    data_dir_dict = {
-        "coassay_cortex":  "../data/human_prefrontal_cortex_multiomic/reduce_processed/", # HC
-        "human_organoid":  "../data/human_organoid_Fleck2022/reduce_processed/", # HO
-        "drosophila":  "../data/drosophila_embryonic/reduce_processed/", # DR
-        "mouse_neocortex":  "../data/Yuan2022_MouseNeocortex/reduce_processed/", # MN
-    }
     # -----
     save_filename = "./res/comparison/{}-{}-{}-ae-{}dim-metric.npy".format(data_name, data_type, split_type, latent_dim)
     if not os.path.isfile(save_filename):
@@ -199,13 +198,13 @@ if __name__ == '__main__':
         (
             ann_rna_data, ann_atac_data, rna_cell_tps, atac_cell_tps,
             rna_n_tps, atac_n_tps, n_genes, n_peaks
-        ) = loadSCData(data_name=data_name, data_type=data_type, split_type=split_type, data_dir=data_dir_dict[data_name])
+        ) = loadSCData(data_name=data_name, data_type=data_type, split_type=split_type, data_dir=DATA_DIR_DICT[data_name])
         rna_train_tps, atac_train_tps, rna_test_tps, atac_test_tps = tpSplitInd(data_name, split_type)
         rna_cnt = ann_rna_data.X
         atac_cnt = ann_atac_data.X
         # cell type
-        rna_cell_types = np.asarray([x.lower() for x in ann_rna_data.obs["cell_type"].values])
-        atac_cell_types = np.asarray([x.lower() for x in ann_atac_data.obs["cell_type"].values])
+        rna_cell_types = np.asarray([str(x).lower() for x in ann_rna_data.obs["cell_type"].values])
+        atac_cell_types = np.asarray([str(x).lower() for x in ann_atac_data.obs["cell_type"].values])
         rna_traj_cell_type = [rna_cell_types[np.where(rna_cell_tps == t)[0]] for t in range(1, rna_n_tps + 1)]
         atac_traj_cell_type = [atac_cell_types[np.where(atac_cell_tps == t)[0]] for t in range(1, atac_n_tps + 1)]
         # Convert to torch project

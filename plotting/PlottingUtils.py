@@ -61,7 +61,7 @@ def computeLatentEmbedding(latent_seq, next_seq, n_neighbors, min_dist):
 
 # ======================================
 
-def plotIntegration(rna_integrated, atac_integrated, rna_cell_types, atac_cell_types, rna_tps, atac_tps, model_name):
+def plotIntegration(rna_integrated, atac_integrated, rna_cell_types, atac_cell_types, rna_tps, atac_tps, model_name, data_name = ""):
     color_list = Kelly20
     # -----
     umap_neighbors = 50
@@ -99,6 +99,21 @@ def plotIntegration(rna_integrated, atac_integrated, rna_cell_types, atac_cell_t
         cell_type_num.sort(reverse=True, key=lambda x: x[1])
         select_cell_typs = [x[0] for x in cell_type_num[:10]]
         cell_type_list = np.asarray([x if x in select_cell_typs else "other" for x in cell_type_list])
+    if data_name == "zebrahub":
+        n_idx = np.where(cell_type_list == "other")[0]
+        ax2.scatter(latent_umap[n_idx, 0], latent_umap[n_idx, 1], label="other", color=gray_color, s=marker_s, alpha=0.4)
+        for i, n in enumerate(np.unique(cell_type_list)):
+            if n == "other":
+                continue
+            n_idx = np.where(cell_type_list == n)[0]
+            if n in select_cell_typs:
+                c = color_list[select_cell_typs.index(n)]
+            else:
+                c = gray_color
+            ax2.scatter(
+                latent_umap[n_idx, 0], latent_umap[n_idx, 1], label=n.split(" ")[0], color=c, s=marker_s,
+                alpha=marker_alpha if n != "other" else 0.4
+            )
     for i, n in enumerate(np.unique(cell_type_list)):  #
         n_idx = np.where(cell_type_list == n)[0]
         if n in select_cell_typs:

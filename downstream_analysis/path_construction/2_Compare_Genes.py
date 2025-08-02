@@ -43,7 +43,7 @@ if __name__ == '__main__':
     # -----
     print("=" * 70)
     print("Compute RNA-derived cell type marker genes...")
-    rna_marker_filename = "./res/cell_type_marker/rna_cell_type_DE_genes_wilcoxon.csv"
+    rna_marker_filename = "res/cell_type_marker/rna_cell_type_DE_genes_wilcoxon.csv"
     if not os.path.isfile(rna_marker_filename):
         scanpy.tl.rank_genes_groups(ann_rna_data, 'cell_type', method='wilcoxon')
         scanpy.pl.rank_genes_groups(ann_rna_data, n_genes=25, sharey=False)
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     # -----
     print("=" * 70)
     print("Compute ATAC-derived cell type marker genes...")
-    atac_marker_filename = "./res/cell_type_marker/atac_cell_type_DE_genes_wilcoxon.csv"
+    atac_marker_filename = "res/cell_type_marker/atac_cell_type_DE_genes_wilcoxon.csv"
     if not os.path.isfile(rna_marker_filename):
         scanpy.tl.rank_genes_groups(ann_atac_data, 'cell_type', method='wilcoxon')
         scanpy.pl.rank_genes_groups(ann_atac_data, n_genes=25, sharey=False)
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     print("=" * 70)
     rna_marker = pd.read_csv(rna_marker_filename)  # from RNA
     atac_marker = pd.read_csv(atac_marker_filename)  # from ATAC gene activity
-    path_de = pd.read_csv("./res/path_DE/path_DE_genes_wilcoxon.csv")
+    path_de = pd.read_csv("res/path_DE/path_DE_genes_wilcoxon.csv")
     # -----
     OL_path_DE = path_de["OL"].values
     GN_path_DE = path_de["GN"].values
