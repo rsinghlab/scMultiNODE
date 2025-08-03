@@ -2,7 +2,7 @@
 Description:
     Visualize PAGA pseudotime estimation with violin plots.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import numpy as np

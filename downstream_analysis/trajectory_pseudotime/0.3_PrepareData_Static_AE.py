@@ -1,8 +1,9 @@
 '''
 Description:
-    Prepare data for pseudotime estimation with Monocle3 or PAGA.
+    Prepare AE single-modal latent variables for pseudotime estimation with Monocle3 or PAGA.
+    Data will be saved to ./res/aux_data/ and ./res/data4Monocle, if they do not exist therein.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import os

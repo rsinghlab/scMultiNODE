@@ -1,3 +1,6 @@
+# Description: Apply Monocle3 to scNODE latent variables.
+# Author: Jiaqi Zhang <jiaqi_zhang2@brown.edu>
+
 # Remember to change this and following directory paths based on your working direction
 setwd("D:\\Projects\\scMultiNODE\\downstream_analysis\\trajectory_pseudotime\\")
 

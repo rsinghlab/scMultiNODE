@@ -6,9 +6,10 @@ Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import scanpy
+import torch
+import torch.distributions as dist
 
 # ==============================================================
-
 
 def sampleGaussian(mean, std):
     '''

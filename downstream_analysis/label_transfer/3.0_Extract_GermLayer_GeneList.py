@@ -1,8 +1,9 @@
 '''
 Description:
     Preparation for GO enrichment analysis: extract 100 highly variable genes for each predicted germ layer group.
+    Data will be saved to ./res/GO, if they do not exist therein.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import scanpy

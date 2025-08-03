@@ -1,9 +1,8 @@
 '''
 Description:
     Visualize integration with 2D UMAP.
-    Plotting Fig. 2 and Supplementary Fig. S1-S3 in the paper.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import numpy as np

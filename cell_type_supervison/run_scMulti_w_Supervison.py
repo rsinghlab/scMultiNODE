@@ -1,6 +1,6 @@
 '''
 Description:
-    scMultiNODE integration with cell type supervision.
+    scMultiNODE training with cell type supervision
 
 Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>

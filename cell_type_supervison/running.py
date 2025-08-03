@@ -1,6 +1,6 @@
 '''
 Description:
-    Model (with alignment) training and prediction.
+    Model training.
 
 Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
@@ -14,36 +14,9 @@ import itertools
 import ot
 import time
 
-from model.layer import LinearNet
-from model.diff_solver import ODE
-from model.dynamic_model import scMultiNODE
 from optim.loss_func import SinkhornLoss, MSELoss
 from optim.quantizedGW import compressed_gw_point_cloud as qGW
 from random import sample
-
-
-# =============================================
-
-def constructscMultiModel(
-        n_genes, n_peaks, latent_dim, anchor_mod,
-        rna_enc_latent=None, rna_dec_latent=None, atac_enc_latent=None, atac_dec_latent=None,
-        fusion_latent = None, drift_latent=None,
-        act_name="relu", ode_method="euler"
-):
-    rna_enc = LinearNet(input_dim=n_genes, latent_size_list=rna_enc_latent, output_dim=latent_dim, act_name=act_name)
-    rna_dec = LinearNet(input_dim=latent_dim, latent_size_list=rna_dec_latent, output_dim=n_genes, act_name=act_name)
-    atac_enc = LinearNet(input_dim=n_peaks, latent_size_list=atac_enc_latent, output_dim=latent_dim, act_name=act_name)
-    atac_dec = LinearNet(input_dim=latent_dim, latent_size_list=atac_dec_latent, output_dim=n_peaks, act_name=act_name)
-    fusion_layer = LinearNet(input_dim=latent_dim, latent_size_list=fusion_latent, output_dim=latent_dim, act_name=act_name)
-    diffeq_drift_net = LinearNet(input_dim=latent_dim, latent_size_list=drift_latent, output_dim=latent_dim, act_name=act_name)
-    diffeq_decoder = ODE(input_dim=latent_dim, drift_net=diffeq_drift_net, ode_method=ode_method)
-    model = scMultiNODE(
-        n_genes, n_peaks,
-        latent_dim=latent_dim, anchor_mod=anchor_mod,
-        rna_enc=rna_enc, rna_dec=rna_dec, atac_enc=atac_enc, atac_dec=atac_dec,
-        fusion_layer=fusion_layer, diffeq_decoder=diffeq_decoder
-    )
-    return model
 
 # =============================================
 
@@ -423,22 +396,3 @@ def _scot_distance(feature_mat, n_neighbors, metric):
     time_cost = end - start
     print("[SCOT KNN | {}] Time cost = {:.4f} secs".format(metric, time_cost))
     return shortest_path
-
-# =============================================
-
-def scMultiPredict(dynamic_model, first_tp_data, rna_tps, atac_tps, n_cells):
-    '''
-    scNODE predicts expressions.
-    :param latent_ode_model (torch.Model): scNODE model.
-    :param first_tp_data (torch.FloatTensor): Expression at the first timepoint.
-    :param tps (torch.FloatTensor): A list of timepoints to predict.
-    :param n_cells (int): The number of cells to predict at each timepoint.
-    :param batch_size (None or int): Either None indicates predicting in a whole or an integer representing predicting
-                                     batch-wise to save computational costs. Default as None.
-    :return: (torch.FloatTensor) Predicted expression with the shape of (# cells, # tps, # genes).
-    '''
-    dynamic_model.eval()
-    first_latent_dist, rna_latent_seq, atac_latent_seq, rna_recon_obs, atac_recon_obs = dynamic_model.predict(
-        first_tp_data, rna_tps, atac_tps, n_cells=n_cells
-    )
-    return rna_recon_obs, atac_recon_obs

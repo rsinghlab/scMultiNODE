@@ -1,4 +1,13 @@
-# https://drive.google.com/drive/folders/1SIkI6FAOtNp3hCeJYxfi19EgnXCDCgOu
+'''
+Description:
+    Preprocessing for zebrahub data.
+
+Author:
+    Jiaqi Zhang <jiaqi_zhang2@brown.edu>
+
+Reference:
+    [1] Raw data link: https://drive.google.com/drive/folders/1SIkI6FAOtNp3hCeJYxfi19EgnXCDCgOu
+'''
 
 import scanpy
 import pandas as pd

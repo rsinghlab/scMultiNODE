@@ -1,3 +1,10 @@
+'''
+Description:
+    Preprocessing for zebrahub data.
+
+Author:
+    Jiaqi Zhang <jiaqi_zhang2@brown.edu>
+'''
 import scanpy
 import pandas as pd
 import numpy as np

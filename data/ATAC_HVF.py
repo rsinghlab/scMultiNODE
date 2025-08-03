@@ -2,6 +2,9 @@
 Description:
     Select highly variable features for ATAC data.
 
+Author:
+    Jiaqi Zhang <jiaqi_zhang2@brown.edu>
+
 Reference:
     [1] https://github.com/colomemaria/epiScanpy/blob/0498043252c58b4c4187007c215dd6d2143d121b/episcanpy/preprocessing/_quality_control.py#L64
 '''

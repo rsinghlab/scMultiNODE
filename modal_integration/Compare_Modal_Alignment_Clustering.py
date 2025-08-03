@@ -1,8 +1,8 @@
 '''
 Description:
-    Compare preservation of cell type in method's integration with Noralized Mutual Information (NMI).
+    Compare preservation of cell type in method's integration with Normalized Mutual Information (NMI).
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import os.path

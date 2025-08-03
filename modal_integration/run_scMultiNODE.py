@@ -1,6 +1,6 @@
 '''
 Description:
-    Align RNA and ATAC measurements with scMultiNODE.
+    scMultiNODE training functions.
 
 Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>

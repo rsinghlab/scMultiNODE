@@ -2,7 +2,7 @@
 Description:
     Visualize integration with 2D UMAP.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import numpy as np

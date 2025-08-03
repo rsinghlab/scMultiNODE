@@ -1,3 +1,7 @@
+# Description: GO enrichment analysis.s
+# Author: Jiaqi Zhang <jiaqi_zhang2@brown.edu>
+# Reference: https://guangchuangyu.github.io/2016/11/showcategory-parameter-for-visualizing-comparecluster-output/
+
 library(org.Dm.eg.db)
 library(clusterProfiler)
 

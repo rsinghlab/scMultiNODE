@@ -1,6 +1,9 @@
 '''
 Description:
-    Align RNA and ATAC assays with UnionCom.
+    Integrate RNA and ATAC assays with UnionCom.
+
+Author:
+    Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 
 Reference:
     [1] Cao, K., Bai, X., Hong, Y., & Wan, L. (2020).
@@ -45,18 +48,3 @@ def UnionComAlign(rna_data, atac_data, beta=1.0, perplexity=30, kmax=40, output_
         return rna_integrated, atac_integrated, uc
     else:
         return rna_integrated, atac_integrated
-
-
-
-if __name__ == '__main__':
-    data1 = np.loadtxt("./UnionCom/simu1/domain1.txt")
-    data2 = np.loadtxt("./UnionCom/simu1/domain2.txt")
-    type1 = np.loadtxt("./UnionCom/simu1/type1.txt")
-    type2 = np.loadtxt("./UnionCom/simu1/type2.txt")
-    type1 = type1.astype(np.int)
-    type2 = type2.astype(np.int)
-    rna_integrated, atac_integrated, uc = UnionComAlign(data1, data2, beta=1.0, perplexity=30, kmax=40, output_dim=32, return_aux=True)
-    integrated_data = [rna_integrated, atac_integrated]
-    uc.test_LabelTA(integrated_data, [type1, type2])
-    uc.Visualize([data1, data2], integrated_data, mode='PCA')  # without datatype
-    uc.Visualize([data1, data2], integrated_data, [type1, type2], mode='PCA')  # with datatype

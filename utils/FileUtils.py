@@ -1,6 +1,6 @@
 '''
 Description:
-    Utility functions for loading files.
+    Utility functions for loading data.
 
 Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>

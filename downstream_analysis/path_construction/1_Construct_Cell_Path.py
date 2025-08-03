@@ -1,8 +1,9 @@
 '''
 Description:
-    Construct cell path in the joint latent space.
+    Cell path construction | Step II: construct cell path and find DE genes of the path.
+    Cell path data will be saved to ./res/ and DE genes will be saved to ./res/path_DE, if they do not exist therein.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import os

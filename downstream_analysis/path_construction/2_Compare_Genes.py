@@ -1,8 +1,8 @@
 '''
 Description:
-    Compare DE genes of cell path with RNA/ATAC-derived cell type marker genes.
+    Cell path construction | Step III: Compare DE genes of cell path with RNA/ATAC-derived cell type marker genes.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import os

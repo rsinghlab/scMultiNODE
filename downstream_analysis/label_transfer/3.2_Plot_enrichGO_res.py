@@ -2,7 +2,7 @@
 Description:
     Plot GO enrichment results.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import pandas as pd
@@ -43,7 +43,7 @@ df['-logp.adj'] = df['p.adjust'].apply(lambda x: -np.log10(x))
 n_terms = 15
 df = (
     df.sort_values("p.adjust")   # sort by significance
-      .groupby("Cluster")        # group by cluster
+      .groupby("Cluster")        # group by predicted germ layer label
       .head(n_terms)
 )
 

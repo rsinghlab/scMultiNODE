@@ -1,26 +1,17 @@
 '''
 Description:
-    Prepare data for pseudotime estimation with Monocle3 or PAGA.
+    Prepare baseline integration for pseudotime estimation with Monocle3 or PAGA.
+    Data will be saved to ./res/aux_data/ and ./res/data4Monocle, if they do not exist therein.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import os
-import scipy.interpolate
-import scipy.stats
-import torch
 import numpy as np
 import pandas as pd
-from tqdm import tqdm
-from sklearn.neighbors import NearestNeighbors
-from scipy.optimize import minimize
-from plotting import *
 from plotting.PlottingUtils import umapWithoutPCA
 from utils.FileUtils import loadSCData, tpSplitInd
 
-pd.set_option('display.max_columns', None)
-pd.set_option('max_colwidth', None)
-pd.set_option('display.expand_frame_repr', False)
 
 # ======================================================
 # Load integrations

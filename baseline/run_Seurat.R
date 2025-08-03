@@ -1,4 +1,5 @@
 # Description: Run Seurat for modality integration
+#Author: Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 # Reference:
 #   [1] https://satijalab.org/seurat/reference/transferdata
 #   [2] https://satijalab.org/seurat/reference/findtransferanchors
@@ -57,32 +58,6 @@ SeuratAlign <- function (rna_mat, atac_mat, k_anchor, ref_domain, k_weight=50, s
   return(list(rna_integrated, atac_integrated))
 }
 
-
-# -------------------------
-
-# # TEST I: on simulation dataset
-# if (FALSE){
-#   print("========================================")
-#   print("Loading data...")
-#   data1 <- read.csv("./UnionCom/simu1/domain1.txt", header = FALSE, sep = " ")
-#   data2 <- read.csv("./UnionCom/simu1/domain2.txt", header = FALSE, sep = " ")
-#   data1 <- as.matrix(data1)
-#   data2 <- as.matrix(data2)
-#   data1[is.nan(data1)] <- 0
-#   data2[is.nan(data2)] <- 0
-#   print(sprintf("RNA data shape: %d, %d", dim(data1)[1], dim(data1)[2]))
-#   print(sprintf("ATAC data shape: %d, %d", dim(data2)[1], dim(data2)[2]))
-#   # -----
-#   res <- SeuratAlign(data1, data2, k_anchor=5, ref_domain="RNA")
-#   rna_integrated <- res[[1]]
-#   atac_integrated <- res[[2]]
-#   print(sprintf("Integrated RNA data shape: %d, %d", dim(rna_integrated)[1], dim(rna_integrated)[2]))
-#   print(sprintf("Integrated ATAC data shape: %d, %d", dim(atac_integrated)[1], dim(atac_integrated)[2]))
-#   # -----
-#   print("Computing metric...")
-#   foscttm <- metric_py$FOSCTTM(rna_integrated, atac_integrated)
-#   print(sprintf("FOSCTTM=%.3f", foscttm))
-# }
 
 
 

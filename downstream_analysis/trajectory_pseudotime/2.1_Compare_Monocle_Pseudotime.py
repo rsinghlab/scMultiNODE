@@ -1,8 +1,8 @@
 '''
 Description:
-    Compare Monocle pseudotime estimation from each method's integration/latent.
+    Compare Monocle3 pseudotime estimation across all methods.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import os
@@ -111,6 +111,7 @@ if __name__ == '__main__':
     print("-" * 70)
     print("Plotting lineage pseudotime...")
     save_filename = "./res/comparison/{}-Monocle-metrics.npy".format(data_name)
+    # Four lineage branches in the HC dataset
     lineage_groups = [
         ["rg", "ipc", "en-fetal-early", "en-fetal-late", "en"],
         ["rg", "ipc", "in-fetal", "in-mge"],

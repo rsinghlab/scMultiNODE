@@ -3,7 +3,7 @@ Description:
     Compare modality integration with quantitative metrics.
 
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import os.path

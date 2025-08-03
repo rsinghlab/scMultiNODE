@@ -1,6 +1,6 @@
 '''
 Description:
-    Experiment - modality integration through scMultiNODE.
+    Experiment - modality integration with scMultiNODE.
 
 Authro:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>

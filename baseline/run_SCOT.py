@@ -1,6 +1,9 @@
 '''
 Description:
-    Align RNA and ATAC assays with SCOT.
+    Integrate RNA and ATAC assays with SCOT.
+
+Author:
+    Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 
 Reference:
     [1] Demetci, P., Santorella, R., Sandstede, B., Noble, W. S., & Singh, R. (2022).
@@ -54,44 +57,3 @@ def SCOTv2Align(rna_data, atac_data, out_dim, normalize=False, norm="l2", k=20, 
 
 
 
-
-
-if __name__ == '__main__':
-    import matplotlib.pyplot as plt
-    # -----
-    # load the data:
-    Xrna = normalize(np.load("SCOT/data/SNARE/SNAREseq_rna_feat.npy"))
-    Yatac = normalize(np.load("SCOT/data/SNARE/SNAREseq_atac_feat.npy"))
-    print("Dimensions of input datasets are: ", "X(rna)= ", Xrna.shape, " Y(atac)= ", Yatac.shape)
-
-    Xrna_ctypes = np.loadtxt("./SCOT/data/SNARE/SNAREseq_rna_types.txt").astype(int)
-    Yatac_ctypes = np.loadtxt("./SCOT/data/SNARE/SNAREseq_atac_types.txt").astype(int)
-    # -----
-    pca = PCA(n_components=2)
-    # Xrna_2Dpca = pca.fit_transform(Xrna)
-    # Yatac_2Dpca = pca.fit_transform(Yatac)
-    # plt.scatter(Xrna_2Dpca[:, 0], Xrna_2Dpca[:, 1], s=5, c=Xrna_ctypes)
-    # plt.show()
-    # plt.scatter(Yatac_2Dpca[:, 0], Yatac_2Dpca[:, 1], s=5, c=Yatac_ctypes)
-    # plt.show()
-    # -----
-
-
-
-    # Xrna_integrated, Yatac_subsamp_integrated = SCOTv2Align(Xrna, Yatac, out_dim=10, normalize=False, norm="l2", k=20, eps=5e-3, rho=0.01, projMethod="embedding")
-    # Xrna_integrated, Yatac_subsamp_integrated = SCOTv1Align(Xrna, Yatac, k=20, e=5e-3, normalize=False, norm="l2", selfTune=False, verbose=True)
-    Xrna_integrated, Yatac_subsamp_integrated = SCOTv1Align(Xrna, Yatac, normalize=False, norm="l2", selfTune=True, verbose=True)
-
-    # run PC jointly:
-    concatenated = np.concatenate((Xrna_integrated, Yatac_subsamp_integrated), axis=0)
-    concatenated_pc = pca.fit_transform(concatenated)
-    Xrna_integrated_pc = concatenated_pc[0:Xrna_integrated.shape[0], :]
-    Yatac_subsamp_integrated_pc = concatenated_pc[Xrna_integrated.shape[0]:, :]
-
-    print(Xrna_integrated.shape, Yatac_subsamp_integrated.shape)
-    print(Xrna_integrated_pc.shape, Yatac_subsamp_integrated_pc.shape)
-
-    plt.scatter(Xrna_integrated_pc[:, 0], Xrna_integrated_pc[:, 1], s=5, c=Xrna_ctypes)
-    plt.show()
-    plt.scatter(Yatac_subsamp_integrated_pc[:, 0], Yatac_subsamp_integrated_pc[:, 1], s=5, c=Yatac_ctypes)
-    plt.show()

@@ -2,12 +2,10 @@
 Description:
     Evaluate germ layer label transfer with marker gene expression.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import os
-
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import scanpy

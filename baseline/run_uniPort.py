@@ -1,6 +1,9 @@
 '''
 Description:
-    Align RNA and ATAC assays with uniPort.
+    Integrate RNA and ATAC assays with uniPort.
+
+Author:
+    Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 
 Reference:
     [1] Cao, K., Gong, Q., Hong, Y., & Wan, L. (2022).
@@ -14,7 +17,6 @@ sys.path.append("uniPort/uniport/model/")
 sys.path.append("uniPort/")
 from baseline.uniPort import Run as runUniPort
 import numpy as np
-import scanpy
 
 
 def uniPortAlign(
@@ -49,54 +51,3 @@ def uniPortAlign(
     rna_integrated = res_latent[rna_mod_idx]
     atac_integrated = res_latent[atac_mod_idx]
     return rna_integrated, atac_integrated
-
-
-
-if __name__ == '__main__':
-    from scipy.sparse import csr_matrix
-
-    data1 = np.loadtxt("./UnionCom/simu1/domain1.txt")
-    data2 = np.loadtxt("./UnionCom/simu1/domain2.txt")
-    type1 = np.loadtxt("./UnionCom/simu1/type1.txt")
-    type2 = np.loadtxt("./UnionCom/simu1/type2.txt")
-
-    data1 = csr_matrix(data1[:, :50])
-    data2 = csr_matrix(data2[:, :50])
-
-    data1_ann = scanpy.AnnData(data1)
-    data2_ann = scanpy.AnnData(data2)
-
-    data1_ann.obs['domain_id'] = 0
-    data1_ann.obs['domain_id'] = data1_ann.obs['domain_id'].astype('category')
-    data1_ann.obs['source'] = 'rna'
-
-    data2_ann.obs['domain_id'] = 1
-    data2_ann.obs['domain_id'] = data2_ann.obs['domain_id'].astype('category')
-    data2_ann.obs['source'] = 'atac'
-
-    adata_cm = data1_ann.concatenate(data2_ann, join='inner', batch_key='domain_id')
-
-    rna_integrated, atac_integrated = uniPortAlign(
-        data1_ann, data2_ann, lambda_kl=1.0, lambda_ot=1.0, reg=0.1, reg_m=1.0,
-        output_dim=32, iteration=100, batch_size=32, lr=1e-3
-    )
-
-    # -----
-
-    from sklearn.decomposition import PCA
-    import matplotlib.pyplot as plt
-
-    pca = PCA(n_components=2, svd_solver="arpack")
-    concatenated = np.concatenate((rna_integrated, atac_integrated), axis=0)
-    concatenated_pc = pca.fit_transform(concatenated)
-    Xrna_integrated_pc = concatenated_pc[0:rna_integrated.shape[0], :]
-    Yatac_integrated_pc = concatenated_pc[rna_integrated.shape[0]:, :]
-
-    print(rna_integrated.shape, atac_integrated.shape)
-    print(Xrna_integrated_pc.shape, Yatac_integrated_pc.shape)
-
-    plt.scatter(Xrna_integrated_pc[:, 0], Xrna_integrated_pc[:, 1], s=5, c="b", label="rna")
-    plt.scatter(Yatac_integrated_pc[:, 0], Yatac_integrated_pc[:, 1], s=5, c="r", label="atac")
-    plt.legend()
-    plt.show()
-

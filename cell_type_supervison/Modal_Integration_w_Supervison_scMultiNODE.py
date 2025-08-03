@@ -2,7 +2,7 @@
 Description:
     scMultiNODE integration with cell type supervision.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import time

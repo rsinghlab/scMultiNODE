@@ -1,9 +1,9 @@
 '''
 Description:
-    Downstram analysis.
-    Step I: train scMultiNODE on HC dataset to learn the joint latent space
+    Cell path construction | Step I: train scMultiNODE on HC dataset to learn the joint latent space
+    Model parameters and integrations will be saved to ./res/trained_model, if they do not exist therein.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import numpy as np

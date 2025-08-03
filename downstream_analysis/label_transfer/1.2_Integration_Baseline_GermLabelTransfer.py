@@ -1,8 +1,9 @@
 '''
 Description:
     Germ layer label transfer with baseline models' integration.
+    Results will be saved to ./res/germ_layer, if they do not exist therein.
 
-Authro:
+Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
 '''
 import os
@@ -10,10 +11,6 @@ import numpy as np
 import pandas as pd
 from utils.FileUtils import loadSCData, tpSplitInd
 from plotting.PlottingUtils import umapWithoutPCA
-
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
-
 
 # ======================================================
 

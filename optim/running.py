@@ -1,6 +1,6 @@
 '''
 Description:
-    Model (with alignment) training and prediction.
+    Model training and prediction.
 
 Author:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>

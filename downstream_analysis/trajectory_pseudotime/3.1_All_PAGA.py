@@ -1,9 +1,13 @@
 '''
 Description:
-    Compute PAGA pseudotime from each method's integration/latent.
+    Apply PAGA for pseudotime estimation.
+    Results will be saved to ./res/data4PAGA, if they do not exist therein.
 
 Authro:
     Jiaqi Zhang <jiaqi_zhang2@brown.edu>
+
+Reference:
+    [1] https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html
 '''
 import os
 import scanpy
