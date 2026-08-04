@@ -195,7 +195,7 @@ def plotAllModelLatent(integrated_dict, model_list, plot_legend=True, plot_pca=T
 
 if __name__ == '__main__':
     # Loading data
-    data_name = "coassay_cortex"  # coassay_cortex, human_organoid, drosophila, mouse_neocortex, zebrahub, amphioxus
+    data_name = "coassay_cortex"  # coassay_cortex, human_organoid, drosophila, mouse_neocortex
     split_type = "all"
     data_type = "reduce"
     # Load processed data to obtain cell type and cell timepoint labels

@@ -2,8 +2,7 @@
 
 Multi-modal integration with scMultiNODE model and baselines on six single-cell datasets.
 
-The preprocessed data can be downloaded from [here](https://doi.org/10.6084/m9.figshare.27420657.v2) (for HC, HO, DR, and MN data) and 
-[here](https://doi.org/10.6084/m9.figshare.29737034.v1) (for ZB and AM data).
+The preprocessed data can be downloaded from [here](https://doi.org/10.6084/m9.figshare.27420657.v2) (for HC, HO, DR, and MN data).
 You can put preprocessed data in the `data` directory, otherwise, you should specify the data file path in [./Modal_Integration_scMultiNODE.py](./Modal_Integration_scMultiNODE.py).
 
 We provide precomputed integration and evaluation metrics of each model for all datasets [here (modal_integration.zip)](https://doi.org/10.6084/m9.figshare.27418872.v4). 

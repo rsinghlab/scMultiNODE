@@ -9,7 +9,6 @@ Author:
 import numpy as np
 import torch
 from model.layer import LinearNet
-from utils.DataUtils import sampleGaussian
 from optim.running import constructscMultiNODEModel, scMultiNODETrain, scMultiNODEPredict
 
 # ================================================
@@ -80,12 +79,8 @@ def _computeFusionLatent(
     dynamic_model.eval()
     all_rna_ata = torch.cat(rna_data, dim=0)
     all_atac_data = torch.cat(atac_data, dim=0)
-    if isinstance(dynamic_model.fusion_layer, LinearNet):
-        latent_rna_sample = dynamic_model.fusion_layer(dynamic_model.rna_enc(all_rna_ata))
-        latent_atac_sample = dynamic_model.fusion_layer(dynamic_model.atac_enc(all_atac_data))
-    else:
-        latent_rna_sample = sampleGaussian(*dynamic_model.fusion_layer(dynamic_model.rna_enc(all_rna_ata)))
-        latent_atac_sample = sampleGaussian(*dynamic_model.fusion_layer(dynamic_model.atac_enc(all_atac_data)))
+    latent_rna_sample = dynamic_model.fusion_layer(dynamic_model.rna_enc(all_rna_ata))
+    latent_atac_sample = dynamic_model.fusion_layer(dynamic_model.atac_enc(all_atac_data))
     rna_recon = dynamic_model.rna_dec(latent_rna_sample)
     atac_recon = dynamic_model.atac_dec(latent_atac_sample)
     return latent_rna_sample, latent_atac_sample, rna_recon, atac_recon

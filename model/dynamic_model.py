@@ -19,15 +19,16 @@ class scMultiNODE(nn.Module):
     def __init__(self, n_genes, n_peaks, latent_dim, rna_enc, rna_dec, atac_enc, atac_dec, fusion_layer, diffeq_decoder, anchor_mod):
         '''
         Initialize scMultiNODE model.
-        :param input_dim (int): Input space size.
+        :param n_genes (int): Number of RNA features (genes).
+        :param n_peaks (int): Number of ATAC features (chromatin regions).
         :param latent_dim (int): Latent space size.
-        :param output_dim (int): Output space size.
         :param rna_enc (LinearNet): RNA encoder.
         :param rna_dec (LinearNet): RNA decoder.
         :param atac_enc (LinearNet): ATAC encoder.
-        :param atac_dec (LinearSigmoidNet): ATAC encoder.
-        :param fusion_layer (LinearVAENet): Fusion layer.
-        :param diffeq_decoder (ODE): Differential equation solver.
+        :param atac_dec (LinearNet): ATAC decoder.
+        :param fusion_layer (LinearNet): Fusion layer mapping modality latents to the joint space.
+        :param diffeq_decoder (ODE): Neural-ODE solver over the joint latent space.
+        :param anchor_mod (str): Anchor modality for the ODE initial condition, "rna" or "atac". We use "rna" in our experiments since both modalities have the first timepoint.
         '''
         super(scMultiNODE, self).__init__()
         self.n_genes = n_genes
@@ -90,11 +91,11 @@ class scMultiNODE(nn.Module):
         return rna_latent_seq, atac_latent_seq, rna_recon_obs, atac_recon_obs
 
 
-    def _sampleGaussian(self, mean, std):
-        '''
-        Sampling with the re-parametric trick.
-        '''
-        d = dist.normal.Normal(torch.Tensor([0.]), torch.Tensor([1.]))
-        r = d.sample(mean.size()).squeeze(-1)
-        x = r * std.float() + mean.float()
-        return x
+    # def _sampleGaussian(self, mean, std):
+    #     '''
+    #     Sampling with the re-parametric trick.
+    #     '''
+    #     d = dist.normal.Normal(torch.Tensor([0.]), torch.Tensor([1.]))
+    #     r = d.sample(mean.size()).squeeze(-1)
+    #     x = r * std.float() + mean.float()
+    #     return x

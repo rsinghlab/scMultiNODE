@@ -110,46 +110,12 @@ def loadMouseNeocortexData(data_dir, split_type):
     return ann_rna_data, ann_atac_data
 
 
-def loadZebrahubCortex(data_dir, split_type):
-    # Load RNA data
-    cnt_data = pd.read_csv("{}/{}-RNA-data-hvg.csv".format(data_dir, split_type), header=0, index_col=0)
-    meta_data = pd.read_csv("{}/{}-RNA-cell_meta.csv".format(data_dir, split_type), header=0, index_col=0)
-    meta_data["tp"] = meta_data["tp"] + 1
-    ann_rna_data = scanpy.AnnData(X=cnt_data, obs=meta_data, dtype=np.float32)
-    # -----
-    # Load ATAC data
-    cnt_data = pd.read_csv("{}/{}-ATAC-data-hvg.csv".format(data_dir, split_type), header=0, index_col=0)
-    meta_data = pd.read_csv("{}/{}-ATAC-cell_meta.csv".format(data_dir, split_type), header=0, index_col=0)
-    meta_data["tp"] = meta_data["tp"] + 1
-    ann_atac_data = scanpy.AnnData(X=cnt_data, obs=meta_data, dtype=np.float32)
-    return ann_rna_data, ann_atac_data
-
-
-def loadAmphioxus(data_dir, split_type):
-    # Load RNA data
-    cnt_data = pd.read_csv("{}/{}-RNA-data-hvg.csv".format(data_dir, split_type), header=0, index_col=0)
-    meta_data = pd.read_csv("{}/{}-RNA-cell_meta.csv".format(data_dir, split_type), header=0, index_col=0)
-    meta_data["tp"] = meta_data["tp"] + 1
-    ann_rna_data = scanpy.AnnData(X=cnt_data, obs=meta_data, dtype=np.float32)
-    ann_rna_data.obs.cell_type = ann_rna_data.obs.cell_type.apply(lambda x: "unknown" if x=="Unassigned" else x)
-    # -----
-    # Load ATAC data
-    cnt_data = pd.read_csv("{}/{}-ATAC-data-hvg.csv".format(data_dir, split_type), header=0, index_col=0)
-    meta_data = pd.read_csv("{}/{}-ATAC-cell_meta.csv".format(data_dir, split_type), header=0, index_col=0)
-    meta_data["tp"] = meta_data["tp"] + 1
-    ann_atac_data = scanpy.AnnData(X=cnt_data, obs=meta_data, dtype=np.float32)
-    ann_atac_data.obs.cell_type = ann_atac_data.obs.cell_type.apply(lambda x: "unknown" if x == "Unassigned" else x)
-    return ann_rna_data, ann_atac_data
-
-
 # --------------------------------
 # Dataset directories
 coassay_cortex_dir = "../data/human_prefrontal_cortex_multiomic/reduce_processed/"
 human_organoid_dir = "../data/human_organoid_Fleck2022/reduce_processed/"
 drosophila_dir = "../data/drosophila_embryonic/reduce_processed/"
 mouse_neocortex_dir = "../data/Yuan2022_MouseNeocortex/reduce_processed"
-zebrahub_dir = "../data/Kim2024_Zebrahub/reduce_processed"
-amphioxus_dir = "../data/Ma2022_Amphioxus/reduce_processed"
 
 
 def loadSCData(data_name, data_type, split_type, data_dir=None):
@@ -184,22 +150,6 @@ def loadSCData(data_name, data_type, split_type, data_dir=None):
         processed_data = preprocess(ann_rna_data.copy())
         ann_rna_data = processed_data
         ann_atac_data.X = ann_atac_data.X.astype(float)
-    elif data_name == "zebrahub":
-        data_dir = zebrahub_dir if data_dir is None else data_dir
-        ann_rna_data, ann_atac_data = loadZebrahubCortex(data_dir, split_type)
-        print("Pre-processing...")
-        ann_rna_data.X = ann_rna_data.X.astype(float)
-        ann_atac_data.X = ann_atac_data.X.astype(float)
-        ann_atac_data = preprocessLog(ann_atac_data.copy()) # zebrahub provides gene activity matrix for ATAC
-    elif data_name == "amphioxus":
-        data_dir = amphioxus_dir if data_dir is None else data_dir
-        ann_rna_data, ann_atac_data = loadAmphioxus(data_dir, split_type)
-        print("Pre-processing...")
-        ann_rna_data.X = ann_rna_data.X.astype(float)
-        processed_data = preprocess(ann_rna_data.copy())
-        ann_rna_data = processed_data
-        ann_atac_data.X = ann_atac_data.X.astype(float)
-        ann_atac_data = binarize(ann_atac_data.copy())
     else:
         raise ValueError("Unknown data name.")
     rna_cell_tps = ann_rna_data.obs["tp"]

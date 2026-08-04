@@ -82,10 +82,6 @@ def _evaluateUnalignedAlignment(x1_feature, x2_feature, x1_label, x2_label, x1_t
         selected_cell_type = common_cell_types
     elif data_name == "mouse_neocortex":
         selected_cell_type = common_cell_types
-    elif data_name == "zebrahub":
-        selected_cell_type = common_cell_types
-    elif data_name == "amphioxus":
-        selected_cell_type = common_cell_types
     else:
         raise ValueError("The cell types are not selected.")
     x1_idx = [i for i, x in enumerate(x1_label) if x in selected_cell_type and x != "unknown"]
@@ -187,7 +183,7 @@ if __name__ == '__main__':
     latent_dim = 50
     output_dim = latent_dim
     model_list = ["scMultiNODE", "SCOTv1", "SCOTv2", "Pamona", "UnionCom", "uniPort", "Seurat"]
-    data_name = "amphioxus"  # coassay_cortex, human_organoid, drosophila, mouse_neocortex, zebrahub, amphioxus
+    data_name = "coassay_cortex"  # coassay_cortex, human_organoid, drosophila, mouse_neocortex
     split_type = "all"
     data_type = "reduce"
     # -----

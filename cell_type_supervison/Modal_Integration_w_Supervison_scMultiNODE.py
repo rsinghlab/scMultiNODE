@@ -14,7 +14,7 @@ from modal_integration import DATA_DIR_DICT
 
 # ================================================
 # Loading data
-data_name = "zebrahub"  # coassay_cortex, drosophila, mouse_neocortex, human_organoid, amphioxus, zebrahub
+data_name = "coassay_cortex"  # coassay_cortex, drosophila, mouse_neocortex, human_organoid
 split_type = "all"
 data_type = "reduce"
 (
@@ -53,14 +53,6 @@ elif data_name == "coassay_cortex":
     align_coeff = 0.1
     dyn_reg_coeff = 0.1
     n_neighbors = 5
-elif data_name == "zebrahub":
-    align_coeff = 0.01
-    dyn_reg_coeff = 0.001
-    n_neighbors = 10
-elif data_name == "amphioxus":
-    align_coeff = 1.0
-    dyn_reg_coeff = 0.001
-    n_neighbors = 75
 elif data_name == "drosophila":
     align_coeff = 0.01
     dyn_reg_coeff = 0.001

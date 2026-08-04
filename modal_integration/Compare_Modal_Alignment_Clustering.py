@@ -99,7 +99,7 @@ def plotMetric(model_metric):
 
 if __name__ == '__main__':
     # Loading data
-    data_name = "zebrahub"  # coassay_cortex, human_organoid, drosophila, mouse_neocortex, zebrahub, amphioxus
+    data_name = "coassay_cortex"  # coassay_cortex, human_organoid, drosophila, mouse_neocortex
     split_type = "all"
     data_type = "reduce"  # reduce, full
     time_str = getTimeStr()

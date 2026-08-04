@@ -15,7 +15,7 @@ from modal_integration.Compare_Modal_Alignment_Metric import computeAlignmentSco
 
 if __name__ == '__main__':
     latent_dim = 50
-    data_name = "zebrahub"  # coassay_cortex, human_organoid, drosophila, mouse_neocortex, zebrahub, amphioxus
+    data_name = "coassay_cortex"  # coassay_cortex, human_organoid, drosophila, mouse_neocortex
     split_type = "all"
     data_type = "reduce"
     # -----

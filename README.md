@@ -7,7 +7,7 @@ measurements. Next, it utilizes neural ordinary differential equations to explic
 regularization term to learn a dynamic latent space.
 [(bioRxiv preprint)](https://www.biorxiv.org/content/10.1101/2024.10.27.620531v2)
 
-[**Supplementary Notes**](./supplementary_notes_20260803.pdf)
+[**Supplementary Notes**](./supplementary_notes.pdf)
 
 
 ![scMultiNODE model overview](https://github.com/rsinghlab/scMultiNODE/blob/main/model_illustration_v5.png?raw=true)

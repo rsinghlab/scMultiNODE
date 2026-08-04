@@ -307,12 +307,11 @@ def _mod_distance(feature_mat, n_neighbors, metric):
 def scMultiNODEPredict(dynamic_model, first_tp_data, rna_tps, atac_tps, n_cells):
     '''
     scMultiNODE predicts expressions.
-    :param latent_ode_model (torch.Model): scNODE model.
+    :param dynamic_model (scMultiNODE): Trained scMultiNODE model.
     :param first_tp_data (torch.FloatTensor): Expression at the first timepoint.
-    :param tps (torch.FloatTensor): A list of timepoints to predict.
+    :param rna_tps (torch.FloatTensor): A list of timepoints to predict for RNA.
+    :param atac_tps (torch.FloatTensor): A list of timepoints to predict for ATAC.
     :param n_cells (int): The number of cells to predict at each timepoint.
-    :param batch_size (None or int): Either None indicates predicting in a whole or an integer representing predicting
-                                     batch-wise to save computational costs. Default as None.
     :return: (torch.FloatTensor) Predicted expression with the shape of (# cells, # tps, # genes).
     '''
     dynamic_model.eval()
