@@ -7,9 +7,12 @@ measurements. Next, it utilizes neural ordinary differential equations to explic
 regularization term to learn a dynamic latent space.
 [(bioRxiv preprint)](https://www.biorxiv.org/content/10.1101/2024.10.27.620531v2)
 
-![scMultiNODE model overview](https://github.com/rsinghlab/scMultiNODE/blob/main/model_illustration.jpg?raw=true)
+![scMultiNODE model overview](https://github.com/rsinghlab/scMultiNODE/blob/main/model_illustration_v5.jpg?raw=true)
 
-**If you have questions or find any problems with our codes, feel free to submit issues or send emails to jiaqi_zhang2@brown.edu or other corresponding authors.**
+![Supplementary Notes](https://github.com/rsinghlab/scMultiNODE/blob/main/supplementary_notes_20260803.pdf)
+
+
+**If you have questions or find any problems with our codes, feel free to submit issues or send emails to jiaqi_zhang2@alumni.brown.edu or other corresponding authors.**
 
 
 ## Requirements
@@ -19,10 +22,9 @@ Our codes have been tested in Python 3.7. Required packages are listed in [./ins
 ## Data
 
 - Raw and preprocessed data of six temporally resolved multi-modal single-cell datasets can be downloaded 
-from [here](https://doi.org/10.6084/m9.figshare.27420657.v2) (for HC, HO, DR, and MN data) and 
-[here](https://doi.org/10.6084/m9.figshare.29737034.v1) (for ZB and AM data).
+from [here](https://doi.org/10.6084/m9.figshare.27420657.v2) (for HC, HO, DR, and MN data).
 
-- All model integrations and corresponding evaluation metrics on six datasets are available at [here (modal_integration.zip)](https://doi.org/10.6084/m9.figshare.27418872.v4).
+- All model integrations and corresponding evaluation metrics on all datasets are available at [here (modal_integration.zip)](https://doi.org/10.6084/m9.figshare.27418872.v4).
 
 - Investigation of scMultiNODE with cell type supervision are available at [here (cell_type_supervision.zip)](https://doi.org/10.6084/m9.figshare.27418872.v4).
 
@@ -65,4 +67,4 @@ The script of using scMultiNODE for integration is shown in [./modal_integration
 ## Bugs & Suggestions
 
 Please report any bugs, problems, suggestions, or requests as a [Github issue](https://github.com/rsinghlab/scMultiNODE/issues) 
-or send emails to *jiaqi_zhang2@brown.edu* or other corresponding authors.
+or send emails to *jiaqi_zhang2@alumni.brown.edu* or other corresponding authors.
