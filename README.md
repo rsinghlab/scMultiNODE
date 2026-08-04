@@ -1,4 +1,4 @@
-# scMultiNODE: Integrative and Scalable Framework for Multi-Modal Temporal Single-Cell Data
+# scMultiNODE: Recovering Developmental Dynamics in Weakly Resolved Modalities through Multi-Modal Integration
 
 We introduce scMultiNODE, an unsupervised integration model that combines gene expression and chromatin accessibility 
 measurements in developing single cells, while preserving cell type variations and cellular dynamics. First, scMultiNODE 
