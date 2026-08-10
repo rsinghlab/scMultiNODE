@@ -5,7 +5,7 @@ measurements in developing single cells, while preserving cell type variations a
 uses a scalable, Quantized Gromov-Wasserstein optimal transport to align a large number of cells across different 
 measurements. Next, it utilizes neural ordinary differential equations to explicitly model cell development with a 
 regularization term to learn a dynamic latent space.
-[(bioRxiv preprint)](https://www.biorxiv.org/content/10.1101/2024.10.27.620531v2)
+[(bioRxiv preprint)](https://www.biorxiv.org/content/10.1101/2024.10.27.620531v3)
 
 [**Supplementary Notes**](./supplementary_notes.pdf)
 
