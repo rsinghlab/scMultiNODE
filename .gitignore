@@ -36,7 +36,6 @@ cmake-build-*/
 # IntelliJ
 out/
 
-.idea/
 
 ###############################################################
 
@@ -189,6 +188,7 @@ cython_debug/
 *.npy
 *.pdf
 *.pt
+*.af
 
 
 ./data/human_organoid_Fleck2022/raw/*

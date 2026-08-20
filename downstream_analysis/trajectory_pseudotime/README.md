@@ -19,3 +19,6 @@ Pseudotime estimation with [Monocle3](https://cole-trapnell-lab.github.io/monocl
 - [4.1_Plot_Monocle_Pseudotime_Violin_for_All.py](./4.1_Plot_Monocle_Pseudotime_Violin_for_All.py): Visualize Monocle3 pseudotime estimation with violin plots.
 - [4.2_Plot_PAGA_Pseudotime_Violin_for_All.py](./4.2_Plot_PAGA_Pseudotime_Violin_for_All.py): Visualize PAGA pseudotime estimation with violin plots.
 
+- [5.1_scNODE_Transfer_Pseudotime.py](./5.1_scNODE_Transfer_Pseudotime.py): Pseudotime prediction for scNODE (transfer). 
+Related file can be downloaded from [here (scNODE_pseudotime.zip)](https://doi.org/10.6084/m9.figshare.33297117). 
+The downloaded file should be extrated and put in the `trajectory_pseudotime` directory.

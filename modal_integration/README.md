@@ -8,6 +8,9 @@ You can put preprocessed data in the `data` directory, otherwise, you should spe
 We provide precomputed integration and evaluation metrics of each model for all datasets [here (modal_integration.zip)](https://doi.org/10.6084/m9.figshare.27418872.v4). 
 You can download them and put in the [modal_integration/res](./res) directory.
 
+We also compared our scMultiNODE with a single-modal dynamic model scNODE. The single-modal latent representations 
+computed by scNODE can be downloaded from [here (scNODE_res.zip)](https://doi.org/10.6084/m9.figshare.33296709)
+
 
 
 ## Model running
