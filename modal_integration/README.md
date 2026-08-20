@@ -9,7 +9,7 @@ We provide precomputed integration and evaluation metrics of each model for all 
 You can download them and put in the [modal_integration/res](./res) directory.
 
 We also compared our scMultiNODE with a single-modal dynamic model scNODE. The single-modal latent representations 
-computed by scNODE can be downloaded from [here (scNODE_res.zip)](https://doi.org/10.6084/m9.figshare.33296709)
+computed by scNODE can be downloaded from [here (scNODE_res.zip)](https://doi.org/10.6084/m9.figshare.33296709).
 
 
 
@@ -21,3 +21,8 @@ computed by scNODE can be downloaded from [here (scNODE_res.zip)](https://doi.or
 - [./Compare_Modal_Integration_UMAP.py](./Compare_Modal_Integration_UMAP.py): Visualize integration with UMAP.
 - [./Compare_Modal_Integration_PCA.py](./Compare_Modal_Integration_PCA.py): Visualize integration with PCA.
 - [./run_scMultiNODE.py](./run_scMultiNODE.py): scMultiNODE training details.
+
+
+- [./Evaluate_AE_Latent.py](./Evaluate_AE_Latent.py): Evaluation single-modal latent from AE.
+- [./Evaluate_scNODE_Latent.py](./Evaluate_scNODE_Latent.py): Evaluation single-modal latent from scNODE. The precomputed 
+scNODE latent can be downloaded from [here (scNODE_res.zip)](https://doi.org/10.6084/m9.figshare.33296709).
